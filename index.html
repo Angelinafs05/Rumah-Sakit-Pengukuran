@@ -415,6 +415,496 @@
   }
   .cta-desc { font-size: 18px; color: rgba(255,255,255,0.95); margin-bottom: 36px; position: relative; z-index: 1; }
   .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,0.85);
+    padding: 48px; display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo { font-size: 20px; font-weight: 900; color: white; }
+  .footer-logo span { color: var(--accent-gold); }
+  .footer-copy { font-size: 13px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--primary-light); }
+
+  /* ── ANIMATIONS ─────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(32px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes crownBounce {
+    0%,100%{ transform: rotate(-3deg) translateY(0); }
+    30%    { transform: rotate(-3deg) translateY(-8px) rotate(-1deg); }
+    60%    { transform: rotate(-3deg) translateY(-4px) rotate(1deg); }
+  }
+  @keyframes glowPulse {
+    0%,100%{ box-shadow: var(--shadow-teal-glow); }
+    50%    { box-shadow: 0 8px 40px rgba(43,170,140,0.55); }
+  }
+  @keyframes confettiFall {
+    0%  { transform: translateY(-40px) rotate(0deg); opacity:1; }
+    100%{ transform: translateY(100vh) rotate(360deg); opacity:0; }
+  }
+
+  .hero-content > * { animation: fadeUp 0.6s ease both; }
+  .hero-content .hero-badge    { animation-delay: 0.1s; }
+  .hero-content .hero-logo-wrap{ animation-delay: 0.25s; }
+  .hero-content .hero-subtitle { animation-delay: 0.4s; }
+  .hero-content .hero-actions  { animation-delay: 0.55s; }
+  .hero-content .hero-stats    { animation-delay: 0.7s; }
+  .hero-logo-wrap { animation: crownBounce 1.6s ease-in-out infinite; }
+  .layanan-card:nth-child(2) { animation: glowPulse 2.5s infinite; }
+
+  /* Confetti decor */
+  .confetti-piece {
+    position: absolute; border-radius: 3px; opacity: 0.7;
+    animation: confettiFall linear infinite;
+    pointer-events: none;
+  }
+
+  /* ── HAMBURGER MENU ─────────────────────────── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    width: 44px; height: 44px; cursor: pointer;
+    border: none; background: none; padding: 4px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+  }
+  .nav-hamburger:hover { background: var(--primary-bg); }
+  .nav-hamburger span {
+    display: block; height: 3px; border-radius: 3px;
+    background: var(--primary-dark);
+    transition: transform 0.3s, opacity 0.3s, width 0.3s;
+  }
+  .nav-hamburger span:nth-child(2) { width: 70%; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .nav-drawer {
+    display: none;
+    position: fixed; top: 70px; left: 0; width: 100%; z-index: 99;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 2px solid var(--primary-bg);
+    box-shadow: var(--shadow-md);
+    padding: 20px 20px 28px;
+    flex-direction: column; gap: 4px;
+    transform: translateY(-10px); opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .nav-drawer.open {
+    display: flex;
+    transform: translateY(0); opacity: 1;
+  }
+  .nav-drawer a {
+    text-decoration: none; font-weight: 700; font-size: 17px;
+    color: var(--text-mid); padding: 14px 16px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s, color 0.15s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-drawer a:hover { background: var(--primary-bg); color: var(--primary-dark); }
+  .nav-drawer .drawer-cta {
+    margin-top: 12px;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-light));
+    color: var(--text-dark); font-weight: 800;
+    text-align: center; justify-content: center;
+    box-shadow: var(--shadow-gold-glow);
+  }
+
+  /* ── TABLET (max 1024px) ────────────────────── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 32px; }
+    .nav-links { gap: 20px; }
+    .hero { padding: 100px 32px 60px; }
+    .hero-fan { right: -80px; width: 420px; height: 420px; }
+    .fan-card { width: 130px; height: 180px; top: 80px; left: 145px; }
+    .fan-card .card-icon { font-size: 40px; }
+    section { padding: 72px 32px; }
+    .section-title { font-size: 38px; }
+    .fasilitas-wrap { gap: 32px; }
+    .dokter-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── MOBILE (max 768px) ─────────────────────── */
+  @media (max-width: 768px) {
+    /* Navbar */
+    nav { padding: 0 16px; height: 64px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-logo-text { font-size: 17px; }
+
+    /* Hero */
+    .hero {
+      padding: 90px 20px 72px;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: auto;
+    }
+    .hero-fan { display: none; }
+    .hero-circle.c1 { width: 200px; height: 200px; top: -40px; right: -60px; }
+    .hero-circle.c2 { display: none; }
+    .hero-content { max-width: 100%; width: 100%; }
+    .hero-badge {
+      font-size: 10px; letter-spacing: 3px; padding: 6px 18px;
+      margin-bottom: 20px;
+    }
+    .hero-logo-wrap {
+      padding: 10px 18px; margin-bottom: 18px;
+      box-shadow: 4px 4px 0 var(--primary-dark);
+    }
+    .hero-h-rs { font-size: 32px; }
+    .hero-h-tht { font-size: 60px; }
+    .hero-subtitle { font-size: 15px; margin-bottom: 28px; }
+    .btn-primary { font-size: 15px; padding: 14px 28px; width: 100%; text-align: center; }
+    .btn-outline { font-size: 15px; padding: 12px 24px; width: 100%; text-align: center; }
+    .hero-actions { flex-direction: column; width: 100%; }
+    .hero-stats { gap: 20px; margin-top: 36px; justify-content: space-between; }
+    .stat-num { font-size: 28px; }
+    .stat-label { font-size: 10px; letter-spacing: 1px; }
+    .scroll-indicator { display: none; }
+
+    /* Sections */
+    section { padding: 56px 16px; }
+    .section-title { font-size: 28px; line-height: 1.2; }
+    .section-subtitle { font-size: 15px; margin-bottom: 32px; }
+    .section-badge { font-size: 11px; letter-spacing: 2px; padding: 6px 14px; }
+
+    /* Layanan */
+    .layanan-grid { grid-template-columns: 1fr; gap: 16px; }
+    .layanan-card { padding: 24px; }
+    .card-icon-wrap { width: 52px; height: 52px; font-size: 22px; margin-bottom: 14px; }
+    .card-title { font-size: 18px; }
+    .card-desc { font-size: 14px; }
+
+    /* Dokter */
+    .dokter-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .dokter-card { padding: 20px 14px; }
+    .dokter-avatar { width: 64px; height: 64px; font-size: 26px; }
+    .dokter-name { font-size: 14px; }
+    .dokter-spesialis { font-size: 12px; }
+
+    /* Fasilitas */
+    .fasilitas { padding: 56px 16px; }
+    .fasilitas-wrap { grid-template-columns: 1fr; gap: 28px; }
+    .fasilitas-img { font-size: 70px; transform: rotate(0deg); margin-top: 8px; }
+    .fasilitas-item { padding: 16px 18px; gap: 12px; }
+    .fasi-icon { font-size: 22px; }
+    .fasi-title { font-size: 15px; }
+    .fasi-desc { font-size: 13px; }
+
+    /* Testimoni */
+    .testi-grid { grid-template-columns: 1fr; gap: 16px; }
+    .testi-card { padding: 22px; }
+    .testi-text { font-size: 14px; }
+
+    /* CTA */
+    .cta-bottom { padding: 60px 20px; }
+    .cta-title { font-size: 26px; }
+    .cta-desc { font-size: 15px; }
+    .cta-ribbon { font-size: 10px; letter-spacing: 3px; padding: 8px 24px; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .cta-actions .btn-primary,
+    .cta-actions .btn-outline { width: 100%; max-width: 320px; text-align: center; }
+
+    /* Footer */
+    footer {
+      flex-direction: column; text-align: center;
+      padding: 36px 20px; gap: 20px;
+    }
+    .footer-links { justify-content: center; flex-wrap: wrap; gap: 16px; }
+  }
+
+  /* ── SMALL PHONES (max 400px) ───────────────── */
+  @media (max-width: 400px) {
+    .hero-h-rs { font-size: 26px; }
+    .hero-h-tht { font-size: 48px; }
+    .hero-logo-wrap { padding: 8px 14px; }
+    .dokter-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 16px; }
+    .stat-num { font-size: 24px; }
+    .section-title { font-size: 24px; }
+    .cta-title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🏥</div>
+    <div class="nav-logo-text">RS THT <span>Nusantara</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#dokter">Dokter</a></li>
+    <li><a href="#fasilitas">Fasilitas</a></li>
+    <li><a href="#testimoni">Testimoni</a></li>
+  </ul>
+  <a href="#daftar" class="nav-cta">Daftar Sekarang</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#layanan" onclick="closeDrawer()">🩺 Layanan</a>
+  <a href="#dokter" onclick="closeDrawer()">👨‍⚕️ Dokter</a>
+  <a href="#fasilitas" onclick="closeDrawer()">🏨 Fasilitas</a>
+  <a href="#testimoni" onclick="closeDrawer()">💬 Testimoni</a>
+  <a href="#daftar" class="drawer-cta" onclick="closeDrawer()">🗓 Daftar Sekarang</a>
+</div>
+
+<!-- HERO -->
+<main id="main-content">
+<section class="hero" id="hero">
+  <!-- Floating circles -->
+  <div class="hero-circle c1"></div>
+  <div class="hero-circle c2"></div>
+  <div class="hero-circle c3"></div>
+
+  <!-- Confetti pieces -->
+  <div class="confetti-piece" style="width:10px;height:10px;background:#FFD23F;left:8%;top:-20px;animation-duration:3.8s;animation-delay:0.2s;"></div>
+  <div class="confetti-piece" style="width:14px;height:6px;background:#3CC9A8;left:20%;top:-20px;animation-duration:4.2s;animation-delay:1s;"></div>
+  <div class="confetti-piece" style="width:8px;height:8px;background:#EF6C4A;left:65%;top:-20px;animation-duration:3.5s;animation-delay:0.5s;"></div>
+  <div class="confetti-piece" style="width:12px;height:5px;background:#5DADE2;left:78%;top:-20px;animation-duration:4.5s;animation-delay:1.5s;"></div>
+  <div class="confetti-piece" style="width:7px;height:7px;background:#FFD23F;left:90%;top:-20px;animation-duration:3.2s;animation-delay:0.8s;"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ Spesialis THT Terpercaya</div>
+
+    <div class="hero-logo-wrap">
+      <span class="hero-h-rs">RS</span>
+      <span class="hero-h-tht">THT</span>
+    </div>
+
+    <p class="hero-subtitle">
+      Pusat layanan kesehatan <strong>Telinga, Hidung & Tenggorokan</strong> terlengkap di Jawa Timur. Ditangani dokter spesialis berpengalaman, fasilitas modern, dan pelayanan tulus dari hati.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#daftar" class="btn-primary">🗓 Daftar Konsultasi</a>
+      <a href="#layanan" class="btn-outline">Lihat Layanan →</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Tahun Berdiri</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">12K+</span>
+        <span class="stat-label">Pasien Tertangani</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">8</span>
+        <span class="stat-label">Dokter Spesialis</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Siap Melayani</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fan Cards -->
+  <div class="hero-fan" aria-hidden="true">
+    <div class="fan-card"><span class="card-icon">👂</span></div>
+    <div class="fan-card"><span class="card-icon">👃</span></div>
+    <div class="fan-card"><span class="card-icon">🏥</span></div>
+    <div class="fan-card"><span class="card-icon">💊</span></div>
+    <div class="fan-card"><span class="card-icon">🩺</span></div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+    scroll
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section class="layanan" id="layanan">
+  <div class="section-badge">🩺 Layanan Kami</div>
+  <h2 class="section-title">Solusi Lengkap untuk<br><span>Kesehatan THT Anda</span></h2>
+  <p class="section-subtitle">Dari pemeriksaan rutin hingga penanganan kompleks — semua tersedia di satu tempat dengan teknologi terkini.</p>
+  <div class="layanan-grid">
+    <div class="layanan-card">
+      <div class="card-icon-wrap">👂</div>
+      <div class="card-title">Pemeriksaan Telinga</div>
+      <p class="card-desc">Diagnosis dan penanganan gangguan pendengaran, tinnitus, infeksi telinga luar & tengah, serta serumen prop menggunakan audiometri digital.</p>
+      <span class="card-tag">Audiologi</span>
+    </div>
+    <div class="layanan-card highlight">
+      <div class="card-icon-wrap">👃</div>
+      <div class="card-title">Penanganan Hidung</div>
+      <p class="card-desc">Rinitis alergi, sinusitis, polip hidung, septum deviasi. Tersedia tindakan FESS (endoskopi sinus) dengan peralatan generasi terbaru.</p>
+      <span class="card-tag">⭐ Unggulan</span>
+    </div>
+    <div class="layanan-card">
+      <div class="card-icon-wrap">🗣️</div>
+      <div class="card-title">Tenggorokan & Suara</div>
+      <p class="card-desc">Tonsilitis, faringitis, laringitis, gangguan suara & disfagia. Pemeriksaan laringoskopi fleksibel tersedia untuk evaluasi mendalam.</p>
+      <span class="card-tag">Laringologi</span>
+    </div>
+    <div class="layanan-card boom">
+      <div class="card-icon-wrap">🔬</div>
+      <div class="card-title">Operasi Endoskopi</div>
+      <p class="card-desc">Tindakan bedah minimal invasif untuk sinus, amandel, adenoid, dan tumor jinak di area kepala-leher dengan pemulihan lebih cepat.</p>
+      <span class="card-tag">Bedah THT</span>
+    </div>
+    <div class="layanan-card">
+      <div class="card-icon-wrap">🧒</div>
+      <div class="card-title">THT Anak</div>
+      <p class="card-desc">Penanganan khusus anak: otitis media, adenotonsilitis, gangguan bicara, dan skrining pendengaran bayi baru lahir (BERA/OAE).</p>
+      <span class="card-tag">Pediatri THT</span>
+    </div>
+    <div class="layanan-card">
+      <div class="card-icon-wrap">💻</div>
+      <div class="card-title">Telekonsultasi</div>
+      <p class="card-desc">Konsultasi online dengan dokter spesialis THT kami dari rumah. Tersedia setiap hari melalui aplikasi resmi RS THT Nusantara.</p>
+      <span class="card-tag">Online</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOKTER -->
+<section class="dokter" id="dokter">
+  <div class="section-badge">👨‍⚕️ Tim Medis</div>
+  <h2 class="section-title">Dokter Spesialis<br>Berpengalaman</h2>
+  <p class="section-subtitle">Tim kami terdiri dari spesialis THT lulusan universitas terkemuka dengan jam terbang tinggi dan dedikasi penuh.</p>
+  <div class="dokter-grid">
+    <div class="dokter-card">
+      <div class="dokter-avatar">👨‍⚕️</div>
+      <span class="dokter-rank">🥇 Ketua Tim</span>
+      <div class="dokter-name">dr. Ahmad Santoso, Sp.THT-KL</div>
+      <div class="dokter-spesialis">Konsultan Onkologi Kepala-Leher</div>
+    </div>
+    <div class="dokter-card">
+      <div class="dokter-avatar">👩‍⚕️</div>
+      <span class="dokter-rank">🥈 Senior</span>
+      <div class="dokter-name">dr. Sari Dewi, Sp.THT-KL</div>
+      <div class="dokter-spesialis">Spesialis Rinologi & Alergi</div>
+    </div>
+    <div class="dokter-card">
+      <div class="dokter-avatar">👨‍⚕️</div>
+      <span class="dokter-rank">🥉 Senior</span>
+      <div class="dokter-name">dr. Budi Hartono, Sp.THT-KL</div>
+      <div class="dokter-spesialis">Spesialis Audiologi & Neurootologi</div>
+    </div>
+    <div class="dokter-card">
+      <div class="dokter-avatar">👩‍⚕️</div>
+      <span class="dokter-rank">⭐ Spesialis</span>
+      <div class="dokter-name">dr. Citra Nadia, Sp.THT-KL</div>
+      <div class="dokter-spesialis">THT Anak & Laringologi</div>
+    </div>
+  </div>
+</section>
+
+<!-- FASILITAS -->
+<section class="fasilitas" id="fasilitas">
+  <div class="fasilitas-wrap">
+    <div>
+      <div class="section-badge">🏨 Fasilitas</div>
+      <h2 class="section-title">Peralatan Modern,<br><span>Standar Internasional</span></h2>
+      <p class="section-subtitle">Kami terus berinvestasi dalam teknologi terkini agar setiap pasien mendapat diagnosis paling akurat dan perawatan terbaik.</p>
+      <div class="fasilitas-list">
+        <div class="fasilitas-item">
+          <div class="fasi-icon">🔊</div>
+          <div>
+            <div class="fasi-title">Bilik Audiometri Digital</div>
+            <div class="fasi-desc">Pengujian pendengaran dalam ruang kedap suara berstandar ISO dengan audiometer terkalibrasi.</div>
+          </div>
+        </div>
+        <div class="fasilitas-item">
+          <div class="fasi-icon">🔭</div>
+          <div>
+            <div class="fasi-title">Endoskopi Sinus (FESS)</div>
+            <div class="fasi-desc">Sistem endoskopi resolusi tinggi untuk tindakan bedah sinus minimal invasif.</div>
+          </div>
+        </div>
+        <div class="fasilitas-item">
+          <div class="fasi-icon">📡</div>
+          <div>
+            <div class="fasi-title">BERA & OAE Screening</div>
+            <div class="fasi-desc">Skrining pendengaran bayi baru lahir secara cepat, akurat, dan tanpa rasa sakit.</div>
+          </div>
+        </div>
+        <div class="fasilitas-item">
+          <div class="fasi-icon">💉</div>
+          <div>
+            <div class="fasi-title">OK Steril Berstandar</div>
+            <div class="fasi-desc">Kamar operasi berteknologi laminar airflow dengan protokol sterilisasi ketat.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fasilitas-img" aria-hidden="true">🏥</div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="testimoni" id="testimoni">
+  <div class="section-badge">💬 Testimoni</div>
+  <h2 class="section-title">Kata <span>Pasien Kami</span></h2>
+  <p class="section-subtitle">Kepercayaan dan kepuasan pasien adalah motivasi terbesar kami untuk terus berkembang.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Saya sudah 3 tahun menderita sinusitis kronis. Setelah operasi FESS di sini, hidung saya terasa lega dan tidak kambuh lagi selama setahun lebih. Pelayanannya ramah dan dokternya sangat telaten menjelaskan.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">😊</div>
+        <div>
+          <div class="testi-name">Budi Setiawan</div>
+          <div class="testi-stars">★★★★★ &nbsp;Pasien FESS</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card gold">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Anak saya usia 4 tahun sering infeksi amandel. Dokter di sini sangat sabar menangani anak kecil. Prosedurnya berjalan lancar dan pemulihan cepat. Sangat rekomendasikan untuk orang tua yang anaknya punya masalah THT!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Ratna Kusuma</div>
+          <div class="testi-stars">★★★★★ &nbsp;Orang Tua Pasien</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card coral">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Telinga saya berdenging dan pendengaran menurun. Setelah pemeriksaan audiometri dan terapi di sini, kondisinya jauh membaik. Stafnya profesional dan fasilitas audiologinya lengkap. Terima kasih RS THT Nusantara!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👴</div>
+        <div>
+          <div class="testi-name">Hendra Wijaya</div>
+          <div class="testi-stars">★★★★★ &nbsp;Pasien Audiologi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-bottom" id="daftar">
+  <div class="cta-ribbon">📅 Daftarkan Diri Anda</div>
+  <h2 class="cta-title">Jangan Tunda Kesehatan<br>Telinga, Hidung & Tenggorokan Anda</h2>
+  <p class="cta-desc">Konsultasi langsung dengan dokter spesialis kami hari ini — sebelum masalah kecil menjadi besar.</p>
+  <div class="cta-actions">
+    <a href="tel:031000000" class="btn-primary">📞 Hubungi Sekarang</a>
+    <a href="#" class="btn-outline">💬 WhatsApp Kami</a>
+  </div>
+</section>
 </main>
 
 <!-- FOOTER -->
